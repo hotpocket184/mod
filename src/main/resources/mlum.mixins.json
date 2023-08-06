@@ -6,9 +6,9 @@
   "mixins": [
   ],
   "client": [
-    "CreativeRenderMixin",
-    "RenderMixin",
-    "TooltipMixin"
+    "TooltipMixin",
+    "GameMenuMixin",
+    "ClientPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

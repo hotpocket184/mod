@@ -1,14 +1,10 @@
 package me.hotpocket.mlum.mixins;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import me.hotpocket.mlum.Mlum;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.tooltip.TooltipBackgroundRenderer;
 import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.ColorHelper;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
