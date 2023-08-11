@@ -22,79 +22,20 @@ public abstract class ClientPlayerMixin {
     @Inject(at = @At("HEAD"), method = "isGlowing", cancellable = true)
     public void isGlowing(CallbackInfoReturnable<Boolean> cir) {
         Mlum options = Mlum.instance;
-        switch (getName().getString()) {
-            case ("file"):
-                if (options.getLocateFile().getValue() || options.getLocateRazor().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("soap"):
-                if (options.getLocateSoap().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("wire"):
-                if (options.getLocateGlass().getValue() || options.getLocateNails().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("metal"):
-                if (options.getLocateMetal().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("tape"):
-                if (options.getLocateTape().getValue() || options.getLocateWire().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("baseballbat"):
-                if (options.getLocateBat().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("sock"):
-                if (options.getLocateSock().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("timber"):
-                if (options.getLocateTimber().getValue() || options.getLocateNewspaper().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("crowbar"):
-                if (options.getLocateCrowbar().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("trowel"):
-                if (options.getLocateTrowel().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("cloak"):
-                if (options.getLocateCloak().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-            case ("bellyrub"):
-                if (options.getLocateShank().getValue())
-                    cir.setReturnValue(true);
-                else
-                    cir.setReturnValue(false);
-                break;
-        }
+        cir.setReturnType(switch (getName().getString()) {
+            case "file" -> options.getLocateFile().getValue() || options.getLocateRazor().getValue();
+            case "soap" -> options.getLocateSoap().getValue();
+            case "wire" -> options.getLocateGlass().getValue() || options.getLocateNails().getValue();
+            case "metal" -> options.getLocateMetal().getValue();
+            case "tape" -> options.getLocateTape().getValue() || options.getLocateWire().getValue();
+            case "baseballbat" -> options.getLocateBat().getValue();
+            case "sock" -> options.getLocateSock().getValue();
+            case "timber" -> options.getLocateTimber().getValue() || options.getLocateNewspaper().getValue();
+            case "crowbar" -> (options.getLocateCrowbar().getValue();
+            case "trowel" -> options.getLocateTrowel().getValue();
+            case "cloak" -> options.getLocateCloak().getValue();
+            case "bellyrub" -> options.getLocateShank().getValue();
+        });
     }
+
 }
