@@ -23,8 +23,9 @@ public class GameMenuMixin {
     @Inject(method = "createButton", at = @At(value = "RETURN"), cancellable = true)
     protected void gameMenu(Text text, Supplier<Screen> screenSupplier, CallbackInfoReturnable<ButtonWidget> cir) {
         if (Objects.equals(text, Text.translatable("gui.advancements"))) {
+            MinecraftClient client = MinecraftClient.getInstance();
             cir.setReturnValue(ButtonWidget.builder(Text.of("Item Finder"), (button) -> {
-                MinecraftClient.getInstance().setScreen(new ItemFinderScreen(MinecraftClient.getInstance().currentScreen, MinecraftClient.getInstance().options));
+                client.setScreen(new ItemFinderScreen(client.currentScreen, client.options));
             }).width(98).build());
         }
     }
