@@ -125,29 +125,30 @@ public class Mlum implements ClientModInitializer {
                 float y = 25F;
                 boolean didthegreen = false;
                 MatrixStack matrixStack = new MatrixStack();
+                MinecraftClient client = MinecraftClient.getInstance();
                 for (int i = 2; i < lines.size(); i++) {
                     String requirement = lines.get(i).getString().replaceFirst(" - \\dx ", "");
                     int amount = Integer.parseInt(String.valueOf(lines.get(i).getString().charAt(3)));
                     if (chocoMap.containsKey(requirement)) {
                         price += (amount * chocoMap.get(requirement));
-                        for (ItemStack item : MinecraftClient.getInstance().player.getInventory().main) {
+                        for (ItemStack item : client.player.getInventory().main) {
                             if ((item.getName().getString().equalsIgnoreCase(requirement)) && (item.getCount() >= amount)) {
                                 lines.set(i, Text.of(" ✔ " + requirement + " x" + amount).getWithStyle(Style.EMPTY.withColor(Formatting.GREEN)).get(0));
-                                MinecraftClient.getInstance().textRenderer.draw(matrixStack, amount + "x " + requirement + " - " + (amount * chocoMap.get(requirement)), 5F, y, ColorHelper.Argb.getArgb(255, 75, 255, 75));
+                                client.textRenderer.draw(matrixStack, amount + "x " + requirement + " - " + (amount * chocoMap.get(requirement)), 5F, y, ColorHelper.Argb.getArgb(255, 75, 255, 75));
                                 price -= (amount * chocoMap.get(requirement));
                                 didthegreen = true;
                             }
                         }
                         if (!didthegreen) {
                             lines.set(i, Text.of(" ❌ " + requirement + " x" + amount).getWithStyle(Style.EMPTY.withColor(Formatting.RED)).get(0));
-                            MinecraftClient.getInstance().textRenderer.draw(matrixStack, amount + "x " + requirement + " - " + (amount * chocoMap.get(requirement)), 5F, y, ColorHelper.Argb.getArgb(255, 255, 75, 75));
+                            client.textRenderer.draw(matrixStack, amount + "x " + requirement + " - " + (amount * chocoMap.get(requirement)), 5F, y, ColorHelper.Argb.getArgb(255, 255, 75, 75));
                         }
                         y += 10;
                         didthegreen = false;
                     }
                 }
-                MinecraftClient.getInstance().getItemRenderer().renderInGui(matrixStack, new ItemStack(Items.NETHER_BRICK), 5, 5);
-                MinecraftClient.getInstance().textRenderer.draw(matrixStack, "x" + price, 25F, 10F, ColorHelper.Argb.getArgb(255, 255, 255, 255));
+                client.getItemRenderer().renderInGui(matrixStack, new ItemStack(Items.NETHER_BRICK), 5, 5);
+                client.textRenderer.draw(matrixStack, "x" + price, 25F, 10F, ColorHelper.Argb.getArgb(255, 255, 255, 255));
             }
         });
     }
